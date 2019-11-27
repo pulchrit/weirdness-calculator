@@ -1,0 +1,10 @@
+footer {
+/*     margin-top: 2%;
+ */    padding: 2%;
+    text-align: center;
+    border-top: 1px solid #eaeff5;
+}
+
+footer p {
+    font-size: .8em;
+}

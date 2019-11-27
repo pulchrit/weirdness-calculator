@@ -1,0 +1,38 @@
+/* css styles from https://www.w3schools.com/howto/howto_js_rangeslider.asp */
+
+.weirdness-slider {
+    width: 100%;
+    margin: 20px 0; 
+}
+
+.slider {
+    -webkit-appearance: none; 
+    width: 100%;
+    height: 7px;
+    border-radius: 3px;  
+    background: #d4edfd;
+    margin-bottom: 20px;
+  }
+
+ /* Give chrome's auto focus styling to the slider on :focus */
+.slider:focus {
+    outline: -webkit-focus-ring-color auto 5px;
+}
+  
+.slider::-webkit-slider-thumb {
+    -webkit-appearance: none; 
+    appearance: none; 
+    width: 18px;
+    height: 18px;
+    border-radius: 50%; 
+    background: #044066;
+    cursor: pointer;
+}
+
+.slider::-moz-range-thumb {
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background: #044066;
+    cursor: pointer;
+}

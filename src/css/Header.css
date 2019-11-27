@@ -1,0 +1,21 @@
+.header {
+    padding: 2%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    background-color: #eff3f6;
+    border-bottom: 1px solid #eaeff5;
+}
+
+.headline {
+    text-align: left;
+    text-decoration: none;
+}
+
+.headline:link,
+.headline:visited,
+.headline:hover,
+.headline:focus,
+.headelin:active {
+    color: #044066;
+}

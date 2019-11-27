@@ -1,0 +1,9 @@
+.giphy-result {
+    border-top: 1px solid #eaeff5;
+    width: 100%;
+}
+
+.gif-item-result {
+    width: 80%;
+    margin: 0 auto;
+}

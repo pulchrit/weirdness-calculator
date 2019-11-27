@@ -1,0 +1,18 @@
+.select-gif {
+    width: 60%;
+    padding: 3%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.fa-thumbs-up {
+    color: white;
+    font-size: 2em;
+}
+
+.fav-button {
+    width: 125px;
+    margin: 25px 0;
+}
