@@ -2,7 +2,8 @@ import React from 'react';
 import Button from './Button';
 import '../css/SearchBox.css';
 
-const SearchBox = ({ handleSubmitSearch, handleChangeInputValue, inputValue }) => {
+const SearchBox = ({ handleSubmitSearch, handleChangeSearchTerm, searchTerm, handleClearSearchTerm }) => {
+
 
     return (
         <form className='search-form' onSubmit={handleSubmitSearch} >
@@ -19,8 +20,9 @@ const SearchBox = ({ handleSubmitSearch, handleChangeInputValue, inputValue }) =
                     id="search-box"
                     name="search-box"
                     placeholder="Hamburger"
-                    value={inputValue}
-                    onChange={(event) => handleChangeInputValue(event.target.value)}
+                    value={searchTerm}
+                    onFocus={(event) => handleClearSearchTerm(event)}
+                    onChange={(event) => handleChangeSearchTerm(event.target.value)}
                 />
                 
                 <Button 
@@ -33,7 +35,6 @@ const SearchBox = ({ handleSubmitSearch, handleChangeInputValue, inputValue }) =
                     buttonDisabled={false}
                 />
 
-                {/* <button className="button search-button" type="submit">SEARCH</button> */}
             </div>
         </form>
     );   

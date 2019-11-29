@@ -13,7 +13,7 @@ const WeirdSlider = ({ weirdness, handleWeirdnessChange }) => {
                 min="0" 
                 max="10" 
                 value={weirdness}
-                onChange={(event) => handleWeirdnessChange(event.target.value)}
+                onChange={(event) => handleWeirdnessChange(event.target.valueAsNumber)}
             />
 
             <label htmlFor="weirdness">Weirdness: {weirdness}</label>

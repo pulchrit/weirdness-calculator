@@ -12,11 +12,14 @@ import '../css/SelectGif.css';
 const SelectGif = ({ 
     giphyObject, 
     handleSubmitSearch, 
-    handleChangeInputValue, 
-    inputValue,  
+    handleChangeSearchTerm, 
+    handleClearSearchTerm,
+    searchTerm,  
     handleClickAddToFavorites,
     weirdness,
-    handleWeirdnessChange }) => {
+    handleWeirdnessChange,
+    isLoading,
+    error }) => {
 
     return (
         <section className="select-gif">
@@ -25,11 +28,18 @@ const SelectGif = ({
 
             <SearchBox 
                 handleSubmitSearch={handleSubmitSearch}
-                handleChangeInputValue={handleChangeInputValue}
-                inputValue={inputValue}
+                handleChangeSearchTerm={handleChangeSearchTerm}
+                handleClearSearchTerm={handleClearSearchTerm}
+                //handleChangeInputValue={handleChangeInputValue}
+                searchTerm={searchTerm}
+                //inputValue={inputValue}
             />
 
-            <GiphyResult giphyObject={giphyObject} />
+            <GiphyResult 
+                giphyObject={giphyObject}
+                isLoading={isLoading}
+                error={error} 
+            />
 
             {/* It might make more sense to create this as a separate FavButton component, 
             which I started to do, but it seemed a little unnecessary...but I can also see

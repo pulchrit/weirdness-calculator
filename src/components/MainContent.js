@@ -6,25 +6,36 @@ import '../css/MainContent.css';
 const MainContent = ({ 
     giphyObject, 
     handleSubmitSearch, 
-    handleChangeInputValue, 
-    inputValue, 
+    handleChangeSearchTerm, 
+    handleClearSearchTerm,
+    searchTerm, 
     handleClickAddToFavorites, 
     favorites,
     weirdness,
-    handleWeirdnessChange }) => {
+    handleWeirdnessChange,
+    isLoading,
+    error }) => {
     
     return (
         <main>
 
+           {/*  {error && <div className="error">{error}</div>}
+
+            {isLoading 
+                ? <div className="loading">Loading </div>} */}
             <SelectGif 
                 giphyObject={giphyObject}
                 handleSubmitSearch={handleSubmitSearch}
-                handleChangeInputValue={handleChangeInputValue}
-                inputValue={inputValue}
+                handleClearSearchTerm={handleClearSearchTerm}
+                //handleChangeInputValue={handleChangeInputValue}
+                handleChangeSearchTerm={handleChangeSearchTerm}
+                searchTerm={searchTerm}
                 handleClickAddToFavorites={handleClickAddToFavorites}
                 favorites={favorites}
                 weirdness={weirdness}
                 handleWeirdnessChange={handleWeirdnessChange}
+                isLoading={isLoading}
+                error={error}
             />
 
             <Favorites 
