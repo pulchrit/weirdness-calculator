@@ -24,7 +24,6 @@ const Results = ({ favorites }) => {
             />
 
             <Button
-                buttonName="startOverButton"
                 buttonClassName="button"
                 buttonType="button"
                 buttonEvent={null}

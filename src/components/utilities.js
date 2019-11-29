@@ -20,7 +20,7 @@ const buildFetchURL = (searchTerm, weirdness) => {
  */
 const handleServerErrors = (response) => {
     if (!response.ok) {
-      throw new Error (response.statusText)
+      throw new Error ("There was a server error. Please try again.")
     }
     return response; 
 };
@@ -49,13 +49,14 @@ const handle404Errors = (json) => {
  */
   const processData = (data) => {
     return {
-      title: data.data.title,
-      largeUrl: data.data.images.original.webp,
-      largeWidth: data.data.images.original.width,
-      largeHeight: data.data.images.original.height,
-      smallUrl: data.data.images.fixed_width.webp,
-      smallWidth: data.data.images.fixed_width.width,
-      smallHeight: data.data.images.fixed_width.height
+        id: data.data.id,
+        title: data.data.title,
+        largeUrl: data.data.images.original.webp,
+        largeWidth: data.data.images.original.width,
+        largeHeight: data.data.images.original.height,
+        smallUrl: data.data.images.fixed_width.webp,
+        smallWidth: data.data.images.fixed_width.width,
+        smallHeight: data.data.images.fixed_width.height
     }
   }
 

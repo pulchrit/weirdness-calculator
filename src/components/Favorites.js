@@ -48,7 +48,6 @@ const Favorites = ({ favorites }) => {
                 the React Router Link. So, I conditionally render the Link based on whether 
                 disableButton is true/false. This allows for the disabled=true to have an effect.  */}
                 <Button 
-                    buttonName="calcButton"
                     buttonClassName={`${disableButton ? 'disable-link' : 'button calculate-button'}`} 
                     buttonType="button"
                     /* buttonEvent={null}

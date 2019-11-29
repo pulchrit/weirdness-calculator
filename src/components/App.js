@@ -31,6 +31,7 @@ export default class App extends React.Component {
       weirdness: 0,
       giphyObject: placeholderGIF,
       favorites: [], 
+      favoritesError: false,
       isLoading: false,
       error: null
     };
@@ -40,6 +41,8 @@ export default class App extends React.Component {
 
   handleSubmitSearch = async (e) => {
     e.preventDefault();
+
+    console.log('weirdness:', this.state.weirdness);
 
     this.setState({
       isLoading: true
@@ -51,18 +54,24 @@ export default class App extends React.Component {
       const json = await responseVerified.json();
       const data = await handle404Errors(json);
       const processedData = await processData(data);
+      console.log(processedData);
+      // I'm leaving searchTerm in state instead of clearing it, so that
+      // the weirdness for this term can be adjusted, and so that the
+      // searchTerm can be passed along with the object when it's favorited.
       this.setState({
         giphyObject: processedData,
-        isLoading: false,
+        isLoading: false, 
         error: null
       });
     } catch(error) {  
       this.setState({
-        error,
+        // Replace giphyObject placeholder with empty object so error 
+        // or loading message will be dislayed.
+        giphyObject: {}, 
+        error: error.message,
         isLoading: false
       });
     }  
-
   }
 
 
@@ -73,23 +82,27 @@ export default class App extends React.Component {
     });
   }
 
-  handleClearSearchTerm = () => {
+/*   handleClearSearchTerm = () => {
     this.setState({
       searchTerm: ''
     });
-  }
+  } */
 
   handleClickAddToFavorites = (giphyObject) => {
     console.log('handleClickAddToFavorites ran');
     
-    // Add weirdness value from state to giphyObject
+    // Check that no favorite yet exists for this searchTerm.
+
+    
+    // Add weirdness value and searchTerm from state to giphyObject
     const newFavorite = {
       ...giphyObject,
-      weirdness: this.state.weirdness
+      weirdness: this.state.weirdness,
+      forSearchTerm: this.state.searchTerm
     };
 
     
-  
+
     
     // Add newFavorite to favorites list from state.
    /*  const newfavorites = [
@@ -98,12 +111,16 @@ export default class App extends React.Component {
     ]; */
     
     // Add new favorite and update state with new favorites list.
- /*    this.setState({
+    this.setState({
       favorites: [
         ...this.state.favorites,
         newFavorite
       ]
-    }); */
+    }); 
+  }
+
+  handleRemoveFromFavorites = (id) => {
+    console.log('remove from favorites ran');
   }
 
   handleWeirdnessChange = (weirdness) => {
@@ -112,14 +129,7 @@ export default class App extends React.Component {
     });
   }
 
-  // TODO: componentDidMount() { add fetch async/await}
-  // be sure to handle server errors from fetch, but also
-  // handle 404 errors from giphy which are returned as status ok 200,
-  // but with a blank array as the data { data: []}. Check for and handle 
-  // empty arrary as no results found for a given search word. 
   
-
-
   
 
   render() {
@@ -137,9 +147,7 @@ export default class App extends React.Component {
                 giphyObject={this.state.giphyObject}
                 handleSubmitSearch={this.handleSubmitSearch}
                 handleChangeSearchTerm={this.handleChangeSearchTerm}
-                handleClearSearchTerm={this.handleClearSearchTerm}
-                //handleChangeInputValue={this.handleChangeInputValue}
-                //inputValue={this.state.inputValue}
+                //handleClearSearchTerm={this.handleClearSearchTerm}
                 searchTerm={this.state.searchTerm}
                 handleClickAddToFavorites={this.handleClickAddToFavorites}
                 favorites={this.state.favorites}

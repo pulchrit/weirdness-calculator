@@ -2,8 +2,11 @@ import React from 'react';
 import Button from './Button';
 import '../css/SearchBox.css';
 
-const SearchBox = ({ handleSubmitSearch, handleChangeSearchTerm, searchTerm, handleClearSearchTerm }) => {
+const SearchBox = ({ handleSubmitSearch, handleChangeSearchTerm, searchTerm }) => {
 
+    // TODO: Need to research clearing the input field when clicked into. I tried a few things
+    // that cleared the input's value on focus, but those didn't work. So maybe I need 
+    // to try to clear it onClick instead of onFocus? 
 
     return (
         <form className='search-form' onSubmit={handleSubmitSearch} >
@@ -21,7 +24,6 @@ const SearchBox = ({ handleSubmitSearch, handleChangeSearchTerm, searchTerm, han
                     name="search-box"
                     placeholder="Hamburger"
                     value={searchTerm}
-                    onFocus={(event) => handleClearSearchTerm(event)}
                     onChange={(event) => handleChangeSearchTerm(event.target.value)}
                 />
                 
@@ -37,7 +39,8 @@ const SearchBox = ({ handleSubmitSearch, handleChangeSearchTerm, searchTerm, han
 
             </div>
         </form>
-    );   
+    );  
+
 }
 
 export default SearchBox;

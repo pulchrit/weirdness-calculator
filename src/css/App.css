@@ -9,3 +9,7 @@
 .text-link:hover, .text-link:focus {
   color: #4f7f05;
 }
+
+.error {
+  color: red;
+}

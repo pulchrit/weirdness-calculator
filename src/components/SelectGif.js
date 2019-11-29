@@ -7,13 +7,11 @@ import Button from './Button';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faThumbsUp } from '@fortawesome/free-solid-svg-icons';
 import '../css/SelectGif.css';
-//import FavButton from './FavButton';
 
 const SelectGif = ({ 
     giphyObject, 
     handleSubmitSearch, 
     handleChangeSearchTerm, 
-    handleClearSearchTerm,
     searchTerm,  
     handleClickAddToFavorites,
     weirdness,
@@ -29,10 +27,7 @@ const SelectGif = ({
             <SearchBox 
                 handleSubmitSearch={handleSubmitSearch}
                 handleChangeSearchTerm={handleChangeSearchTerm}
-                handleClearSearchTerm={handleClearSearchTerm}
-                //handleChangeInputValue={handleChangeInputValue}
                 searchTerm={searchTerm}
-                //inputValue={inputValue}
             />
 
             <GiphyResult 
@@ -41,18 +36,7 @@ const SelectGif = ({
                 error={error} 
             />
 
-            {/* It might make more sense to create this as a separate FavButton component, 
-            which I started to do, but it seemed a little unnecessary...but I can also see
-            how this is not DRY... */}
-            {/* <button 
-                className="button fav-button" 
-                type="button"
-                onClick={handleClickAddToFavorites(giphyObject)}
-            >
-                <FontAwesomeIcon className='fa-thumbs-up' icon={faThumbsUp} />
-            </button> */}
             <Button 
-                buttonName="favButton"
                 buttonClassName="button fav-button"
                 buttonType="button"
                 buttonEvent={handleClickAddToFavorites}

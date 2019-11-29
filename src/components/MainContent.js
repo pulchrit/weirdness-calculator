@@ -7,7 +7,6 @@ const MainContent = ({
     giphyObject, 
     handleSubmitSearch, 
     handleChangeSearchTerm, 
-    handleClearSearchTerm,
     searchTerm, 
     handleClickAddToFavorites, 
     favorites,
@@ -26,7 +25,7 @@ const MainContent = ({
             <SelectGif 
                 giphyObject={giphyObject}
                 handleSubmitSearch={handleSubmitSearch}
-                handleClearSearchTerm={handleClearSearchTerm}
+               // handleClearSearchTerm={handleClearSearchTerm}
                 //handleChangeInputValue={handleChangeInputValue}
                 handleChangeSearchTerm={handleChangeSearchTerm}
                 searchTerm={searchTerm}
