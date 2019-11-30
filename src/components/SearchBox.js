@@ -10,6 +10,8 @@ const SearchBox = ({ handleSubmitSearch, handleChangeSearchTerm, searchTerm }) =
 
     return (
         <form className='search-form' onSubmit={handleSubmitSearch} >
+
+            {!searchTerm && <p className="enter-search-term">Please enter a search term below.</p>}
             
             <label className="search-label" htmlFor="search-box">
                 Search term

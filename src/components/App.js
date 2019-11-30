@@ -117,6 +117,7 @@ export default class App extends React.Component {
 
       // Add this new favorite to the favorites list in state.
       this.setState({
+        searchTerm: '',
         favorites: [
           ...this.state.favorites,
           newFavorite
@@ -146,8 +147,6 @@ export default class App extends React.Component {
   }
 
   
-  
-
   render() {
     return (
       <div className="App">

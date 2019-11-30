@@ -8,6 +8,10 @@
     margin: 60px 0;
 }
 
+.enter-search-term {
+    color: green;
+}
+
 .search-box-button {
     margin: 10px 0;
     height: 50px;
