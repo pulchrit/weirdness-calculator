@@ -37,19 +37,21 @@ const Favorites = ({ favorites, handleRemoveFromFavorites }) => {
             <div className="favorites-list">
 
                 {favorites.map((item, i) => (
-                    
-                    <FontAwesomeIcon 
-                        key={`remove-${item.id}`}
-                        className='fa-times-circle' 
-                        icon={faTimesCircle} 
-                        onClick={(event) => handleRemoveFromFavorites(item.id)}
-                    />
+                    <div className="favorite-item" key={`favorite-item-${item.id}`}>
+                        
+                        <FontAwesomeIcon 
+                            key={`remove-${item.id}`}
+                            className='fa-times-circle' 
+                            icon={faTimesCircle} 
+                            onClick={(event) => handleRemoveFromFavorites(item.id)}
+                        />
 
-                    <GifItem
-                        key={item.id}
-                        giphyObject={item}
-                        gifSize="small"
-                    />
+                        <GifItem
+                            key={item.id}
+                            giphyObject={item}
+                            gifSize="small"
+                        />
+                    </div>
                 ))}
             </div>
 

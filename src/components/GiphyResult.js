@@ -11,7 +11,7 @@ const GiphyResult = ({ giphyObject, isLoading, error }) => {
     if (error) {
         display = <p className="error">{error}</p>;
     } else if (isLoading) {
-        display = <p>Loading GIF...</p>;
+        display = <p className="loading">Loading GIF...</p>;
     } 
     
     return (

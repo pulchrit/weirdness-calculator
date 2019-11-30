@@ -9,6 +9,7 @@ const MainContent = ({
     handleChangeSearchTerm, 
     searchTerm, 
     handleClickAddToFavorites, 
+    handleRemoveFromFavorites,
     favorites,
     favoritesError,
     weirdness,

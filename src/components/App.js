@@ -126,12 +126,13 @@ export default class App extends React.Component {
   }
 
   handleRemoveFromFavorites = (id) => {
-    console.log('remove from favorites ran');
 
-    // Filter for all favorites that do not have the id passed in. This effectively
-    // removes the favorite that DOES have the id passed in (i.e., the one to remove)
-    const revisedFavorites = this.state.favorites.filter(fav => fav.id !== id)''
+    // Filter for all favorites that do NOT have the id passed in. This effectively
+    // removes the favorite that DOES have the id passed in (i.e., the one the
+    // user wants to remove).
+    const revisedFavorites = this.state.favorites.filter(fav => fav.id !== id);
 
+    // Update state with this new favorites array.
     this.setState({
       favorites: revisedFavorites
     });
