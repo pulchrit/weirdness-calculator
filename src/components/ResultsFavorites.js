@@ -12,7 +12,7 @@ const ResultsFavorites = ({ favorites }) => {
                 
                 <div className="results-favorites-list">
                     {favorites.map((item, i) => (
-                        <div className="favorite-item" key={`favorite-${i}`}>
+                        <div className="results-item" key={`favorite-${i}`}>
                         <GifItem
                             key={`results-favorites-${i}`}
                             giphyObject={item}

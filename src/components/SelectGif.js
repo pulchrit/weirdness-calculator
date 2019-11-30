@@ -13,12 +13,13 @@ const SelectGif = ({
     handleSubmitSearch, 
     handleChangeSearchTerm, 
     searchTerm,  
+    handleClearSearchTerm,
     handleClickAddToFavorites,
     favoritesError,
     weirdness,
     handleWeirdnessChange,
     isLoading,
-    error }) => {
+    error}) => {
 
     return (
         <section className="select-gif">
@@ -28,6 +29,7 @@ const SelectGif = ({
             <SearchBox 
                 handleSubmitSearch={handleSubmitSearch}
                 handleChangeSearchTerm={handleChangeSearchTerm}
+                handleClearSearchTerm={handleClearSearchTerm}
                 searchTerm={searchTerm}
             />
 

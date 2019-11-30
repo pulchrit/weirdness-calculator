@@ -72,6 +72,4 @@ const toTitleCase = (title) => {
     return titleCaseArray.join(" ");
 };
 
-
-
 export { buildFetchURL, handleServerErrors, handle404Errors, processData, toTitleCase };

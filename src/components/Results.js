@@ -4,7 +4,7 @@ import ResultsFavorites from './ResultsFavorites';
 import { Link } from 'react-router-dom';
 import '../css/Results.css';
 
-const Results = ({ favorites }) => {
+const Results = ({ favorites, handleClickStartOver }) => {
     
     // Calculate total weirdness score by finding average weirdness from 
     // the weirdness value of each favorite.
@@ -26,7 +26,7 @@ const Results = ({ favorites }) => {
             <Button
                 buttonClassName="button"
                 buttonType="button"
-                buttonEvent={null}
+                buttonEvent={handleClickStartOver}
                 buttonEventArg={null}
                 buttonContent={<Link to="/" className='start-over-button'>START OVER</Link>}
                 buttonDisabled={false}

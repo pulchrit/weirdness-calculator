@@ -1,6 +1,5 @@
 import React from 'react';
 import { Route, Switch } from 'react-router-dom';
-//import config from './config';
 import { buildFetchURL, handleServerErrors, handle404Errors, processData  } from './utilities';
 import { placeholderGIF } from './tempData';
 import Header from './Header';
@@ -16,16 +15,9 @@ import '../css/App.css';
   (i.e., use class components with Redux). */
 
 
-
- 
- /* const tempFavorite = {
-   ...tempData,
-   weirdness: 3
- }; */
-
 export default class App extends React.Component {
 
- 
+    // Set initial state.
     state = {
       searchTerm: '',
       weirdness: 0,
@@ -33,28 +25,27 @@ export default class App extends React.Component {
       favorites: [], 
       favoritesError: false,
       isLoading: false,
-      error: null
+      error: null,
     };
     
-  
 
-
+  // Fetches data from the Giphy api based on searchTerm and 
+  // weirdness value when the form is submitted in the SearchBox component.
   handleSubmitSearch = async (e) => {
     e.preventDefault();
 
-    console.log('weirdness:', this.state.weirdness);
-
+    // Set isLoading to true so loading message will appear for users.
     this.setState({
-      isLoading: true
+      isLoading: true,
     })
     
+    // Fetch data with async/await.
     try {
       const response = await fetch(buildFetchURL(this.state.searchTerm, this.state.weirdness));
       const responseVerified = await handleServerErrors(response);
       const json = await responseVerified.json();
       const data = await handle404Errors(json);
       const processedData = await processData(data);
-      console.log(processedData);
       // I'm leaving searchTerm in state instead of clearing it, so that
       // the weirdness for this term can be adjusted, and so that the
       // searchTerm can be passed along with the object when it's favorited.
@@ -74,8 +65,8 @@ export default class App extends React.Component {
     }  
   }
 
-
-
+  // Changes the searchTerm in state as the user enters the term 
+  // in the SearchBox component.
   handleChangeSearchTerm = (searchTerm) => {
     this.setState({
       searchTerm,
@@ -84,23 +75,36 @@ export default class App extends React.Component {
     });
   }
 
-/*   handleClearSearchTerm = () => {
+  // Clears the searchTerm when the user clicks into the input element 
+  // in the SearchBox component.
+  handleClearSearchTerm = () => {
     this.setState({
       searchTerm: ''
     });
-  } */
+  } 
 
+  // Adds a GIF object to favorites array in state on click of the favorite
+  // button in SelectGif component. Only does so if a favorite
+  // for the current searchTerm does NOT exist. This method also adds the
+  // weirdness value and searchTerm to the GIF object before adding it to favorites.
   handleClickAddToFavorites = (giphyObject) => {
     
     // Check that no favorite yet exists for this searchTerm.
     // Filter for any favorites with the current searchTerm. If no
     // such favorites exist an empty array will be returned. 
-    const duplicateFound = this.state.favorites.filter(fav => fav.forSearchTerm === this.state.searchTerm);
+    const duplicateSearchTermFound = this.state.favorites.filter(fav => fav.forSearchTerm === this.state.searchTerm);
+
+    // Check that this specific GIF doesn't exist already in favorites. 
+    // (Sometimes during testing, the giphy api returns the same gif even though the weirdness
+    // value has changed. When this occurred, I WAS able to add a duplicate GIF to my favorites.
+    // So, this check just ensures that the GIF itself isn't duplicated in favorites.)
+    // Returns an array with the duplicate object if found.
+    const duplicateGifFound = this.state.favorites.filter(fav => fav.id === giphyObject.id);
 
     // If a favorite for the current searchTerm exists (i.e., the array will 
     // have a length > 0), set favortiesError to true, thus conditionally rendering
     // the error message in the SelectGifs component. 
-    if (duplicateFound.length > 0) {
+    if (duplicateSearchTermFound.length > 0 || duplicateGifFound.length > 0) {
       this.setState({favoritesError: true})
     // If no favorite for this searchTerm exists, add this GIF to favorites.
     } else {
@@ -116,6 +120,8 @@ export default class App extends React.Component {
       };
 
       // Add this new favorite to the favorites list in state.
+      // Rest searchTerm to empty string, so alert will display and focus 
+      // will be passed to the search box in the SearchBox component.
       this.setState({
         searchTerm: '',
         favorites: [
@@ -126,6 +132,8 @@ export default class App extends React.Component {
     }
   }
 
+  // Removes the specified GIF object from the favorites array in state when
+  // the remove button is clicked in the Favorites component.
   handleRemoveFromFavorites = (id) => {
 
     // Filter for all favorites that do NOT have the id passed in. This effectively
@@ -140,9 +148,25 @@ export default class App extends React.Component {
 
   }
 
+  // Changes the weirdness state once the weirdness slider is moved in the 
+  // WeirdSlider element.
   handleWeirdnessChange = (weirdness) => {
     this.setState({
       weirdness
+    });
+  }
+
+  // When user clicks Start Over button in Results component, 
+  // all state should be reset to original/default values. 
+  handleClickStartOver = () => {
+    this.setState({
+      searchTerm: '',
+      weirdness: 0,
+      giphyObject: placeholderGIF,
+      favorites: [], 
+      favoritesError: false,
+      isLoading: false,
+      error: null,
     });
   }
 
@@ -162,7 +186,7 @@ export default class App extends React.Component {
                 giphyObject={this.state.giphyObject}
                 handleSubmitSearch={this.handleSubmitSearch}
                 handleChangeSearchTerm={this.handleChangeSearchTerm}
-                //handleClearSearchTerm={this.handleClearSearchTerm}
+                handleClearSearchTerm={this.handleClearSearchTerm}
                 searchTerm={this.state.searchTerm}
                 handleClickAddToFavorites={this.handleClickAddToFavorites}
                 handleRemoveFromFavorites={this.handleRemoveFromFavorites}
@@ -181,6 +205,7 @@ export default class App extends React.Component {
             render={ () => 
               <Results 
                 favorites={this.state.favorites}
+                handleClickStartOver={this.handleClickStartOver}
               />
             }
           />

@@ -63,8 +63,6 @@ const Favorites = ({ favorites, handleRemoveFromFavorites }) => {
                 <Button 
                     buttonClassName={`${disableButton ? 'disable-link' : 'button calculate-button'}`} 
                     buttonType="button"
-                    /* buttonEvent={null}
-                    buttonEventArg={null} */
                     buttonContent={disableButton 
                         ? <span className="disable-link">CALCULATE MY WEIRDNESS SCORE</span>
                         : <Link to="/results" className="calculate-link">CALCULATE MY WEIRDNESS SCORE</Link>}

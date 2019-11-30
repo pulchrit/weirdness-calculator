@@ -8,6 +8,7 @@ const MainContent = ({
     handleSubmitSearch, 
     handleChangeSearchTerm, 
     searchTerm, 
+    handleClearSearchTerm,
     handleClickAddToFavorites, 
     handleRemoveFromFavorites,
     favorites,
@@ -20,15 +21,10 @@ const MainContent = ({
     return (
         <main>
 
-           {/*  {error && <div className="error">{error}</div>}
-
-            {isLoading 
-                ? <div className="loading">Loading </div>} */}
             <SelectGif 
                 giphyObject={giphyObject}
                 handleSubmitSearch={handleSubmitSearch}
-               // handleClearSearchTerm={handleClearSearchTerm}
-                //handleChangeInputValue={handleChangeInputValue}
+                handleClearSearchTerm={handleClearSearchTerm}
                 handleChangeSearchTerm={handleChangeSearchTerm}
                 searchTerm={searchTerm}
                 handleClickAddToFavorites={handleClickAddToFavorites}
