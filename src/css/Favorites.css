@@ -7,7 +7,6 @@
     flex-direction: column;
     justify-content: flex-start;
     align-items: space-between; 
-
 }
 
 .favorites-list {
@@ -17,6 +16,12 @@
     grid-auto-rows: minmax(50px, auto);
     align-items: start;
     margin: 20px auto; 
+}
+
+.fa-times-circle {
+    background-color: #044066;
+    color: white;
+    size: 1em;
 }
 
 .button-message {

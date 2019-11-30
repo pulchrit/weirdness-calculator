@@ -2,9 +2,11 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import GifItem from './GifItem';
 import Button from './Button';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faTimesCircle } from '@fortawesome/free-solid-svg-icons';
 import '../css/Favorites.css';
 
-const Favorites = ({ favorites }) => {
+const Favorites = ({ favorites, handleRemoveFromFavorites }) => {
 
     // Determine current number of favorites and the number of favorites
     // needed before score can be calculated. 5 GIFs must be liked before score
@@ -33,9 +35,18 @@ const Favorites = ({ favorites }) => {
             {/* This list could be a separate component too...this seemed
             a little easier to manage in terms of adjusting styles and class names... */}
             <div className="favorites-list">
+
                 {favorites.map((item, i) => (
+                    
+                    <FontAwesomeIcon 
+                        key={`remove-${item.id}`}
+                        className='fa-times-circle' 
+                        icon={faTimesCircle} 
+                        onClick={(event) => handleRemoveFromFavorites(item.id)}
+                    />
+
                     <GifItem
-                        key={`favorites-${i}`}
+                        key={item.id}
                         giphyObject={item}
                         gifSize="small"
                     />

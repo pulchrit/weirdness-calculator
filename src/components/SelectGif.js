@@ -14,6 +14,7 @@ const SelectGif = ({
     handleChangeSearchTerm, 
     searchTerm,  
     handleClickAddToFavorites,
+    favoritesError,
     weirdness,
     handleWeirdnessChange,
     isLoading,
@@ -44,6 +45,11 @@ const SelectGif = ({
                 buttonContent={<FontAwesomeIcon className='fa-thumbs-up' icon={faThumbsUp} />}
                 buttonDisabled={false}
             />
+
+            {favoritesError && 
+                <div className="error">
+                    Oops! You are only allowed to like one GIF per search term. Please enter a different search term.
+                </div>}
 
             <WeirdSlider 
                 weirdness={weirdness} 

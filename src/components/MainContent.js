@@ -10,6 +10,7 @@ const MainContent = ({
     searchTerm, 
     handleClickAddToFavorites, 
     favorites,
+    favoritesError,
     weirdness,
     handleWeirdnessChange,
     isLoading,
@@ -31,6 +32,7 @@ const MainContent = ({
                 searchTerm={searchTerm}
                 handleClickAddToFavorites={handleClickAddToFavorites}
                 favorites={favorites}
+                favoritesError={favoritesError}
                 weirdness={weirdness}
                 handleWeirdnessChange={handleWeirdnessChange}
                 isLoading={isLoading}
@@ -39,6 +41,7 @@ const MainContent = ({
 
             <Favorites 
                 favorites={favorites} 
+                handleRemoveFromFavorites={handleRemoveFromFavorites}
             />
 
         </main>

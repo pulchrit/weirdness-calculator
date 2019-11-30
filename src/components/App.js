@@ -78,7 +78,9 @@ export default class App extends React.Component {
 
   handleChangeSearchTerm = (searchTerm) => {
     this.setState({
-      searchTerm
+      searchTerm,
+      // Set favoritesError when a new searchTerm has been entered.
+      favoritesError: false
     });
   }
 
@@ -89,38 +91,51 @@ export default class App extends React.Component {
   } */
 
   handleClickAddToFavorites = (giphyObject) => {
-    console.log('handleClickAddToFavorites ran');
     
     // Check that no favorite yet exists for this searchTerm.
+    // Filter for any favorites with the current searchTerm. If no
+    // such favorites exist an empty array will be returned. 
+    const duplicateFound = this.state.favorites.filter(fav => fav.forSearchTerm === this.state.searchTerm);
 
-    
-    // Add weirdness value and searchTerm from state to giphyObject
-    const newFavorite = {
-      ...giphyObject,
-      weirdness: this.state.weirdness,
-      forSearchTerm: this.state.searchTerm
-    };
+    // If a favorite for the current searchTerm exists (i.e., the array will 
+    // have a length > 0), set favortiesError to true, thus conditionally rendering
+    // the error message in the SelectGifs component. 
+    if (duplicateFound.length > 0) {
+      this.setState({favoritesError: true})
+    // If no favorite for this searchTerm exists, add this GIF to favorites.
+    } else {
 
-    
+      // favoriteError is set to false in handleChangeSearchTerm() 
+      // so that the error message is removed as soon as a new search term is entered.
+      
+      // Add weirdness value and searchTerm from state to giphyObject.
+      const newFavorite = {
+        ...giphyObject,
+        weirdness: this.state.weirdness,
+        forSearchTerm: this.state.searchTerm
+      };
 
-    
-    // Add newFavorite to favorites list from state.
-   /*  const newfavorites = [
-      ...this.state.favorites,
-      newFavorite
-    ]; */
-    
-    // Add new favorite and update state with new favorites list.
-    this.setState({
-      favorites: [
-        ...this.state.favorites,
-        newFavorite
-      ]
-    }); 
+      // Add this new favorite to the favorites list in state.
+      this.setState({
+        favorites: [
+          ...this.state.favorites,
+          newFavorite
+        ]
+      });
+    }
   }
 
   handleRemoveFromFavorites = (id) => {
     console.log('remove from favorites ran');
+
+    // Filter for all favorites that do not have the id passed in. This effectively
+    // removes the favorite that DOES have the id passed in (i.e., the one to remove)
+    const revisedFavorites = this.state.favorites.filter(fav => fav.id !== id)''
+
+    this.setState({
+      favorites: revisedFavorites
+    });
+
   }
 
   handleWeirdnessChange = (weirdness) => {
@@ -150,7 +165,9 @@ export default class App extends React.Component {
                 //handleClearSearchTerm={this.handleClearSearchTerm}
                 searchTerm={this.state.searchTerm}
                 handleClickAddToFavorites={this.handleClickAddToFavorites}
+                handleRemoveFromFavorites={this.handleRemoveFromFavorites}
                 favorites={this.state.favorites}
+                favoritesError={this.state.favoritesError}
                 weirdness={this.state.weirdness}
                 handleWeirdnessChange={this.handleWeirdnessChange}
                 isLoading={this.state.isLoading}
