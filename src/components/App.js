@@ -18,7 +18,7 @@ import '../css/App.css';
 export default class App extends React.Component {
 
     // Set initial state.
-    state = {
+ /*    state = {
       searchTerm: '',
       weirdness: 0,
       giphyObject: placeholderGIF,
@@ -26,7 +26,7 @@ export default class App extends React.Component {
       favoritesError: false,
       isLoading: false,
       error: null,
-    };
+    }; */
     
 
   // Fetches data from the Giphy api based on searchTerm and 
@@ -67,21 +67,21 @@ export default class App extends React.Component {
 
   // Changes the searchTerm in state as the user enters the term 
   // in the SearchBox component.
-  handleChangeSearchTerm = (searchTerm) => {
+ /*  handleChangeSearchTerm = (searchTerm) => {
     this.setState({
       searchTerm,
       // Set favoritesError when a new searchTerm has been entered.
       favoritesError: false
     });
-  }
+  } */
 
   // Clears the searchTerm when the user clicks into the input element 
   // in the SearchBox component.
-  handleClearSearchTerm = () => {
+ /*  handleClearSearchTerm = () => {
     this.setState({
       searchTerm: ''
     });
-  } 
+  }  */
 
   // Adds a GIF object to favorites array in state on click of the favorite
   // button in SelectGif component. Only does so if a favorite
