@@ -15,7 +15,7 @@ class SearchBox extends React.Component {
     // likes a GIF. 
     //constructor(props) {
     constructor() {
-        //super(props)
+        super()
         this.searchRef = React.createRef();
     } 
 
@@ -33,8 +33,8 @@ class SearchBox extends React.Component {
         }
     }
 
-    handleSubmitSearch = (searchTerm, weirdness) => {
-        e.preventDefault();
+    handleSubmitSearch = (event, searchTerm, weirdness) => {
+        event.preventDefault();
         // Dispatch action to get gif from Giphy API based on 
         // searchTerm and weirdness from state.
         this.props.dispatch(fetchGif(searchTerm, weirdness));
@@ -56,7 +56,7 @@ class SearchBox extends React.Component {
 
         return (
 
-            <form className='search-form' onSubmit={this.handleSubmitSearch(searchTerm, weirdness)} >
+            <form className='search-form' onSubmit={(event) => this.handleSubmitSearch(event, searchTerm, weirdness)} >
 
                 {!searchTerm && <p className="enter-search-term">Please enter a search term below.</p>}
                 

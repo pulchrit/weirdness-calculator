@@ -10,21 +10,17 @@ import { connect } from 'react-redux';
 import { addToFavorites } from '../redux/actions';
 import '../css/SelectGif.css';
 
-const SelectGif = ({ 
-    giphyObject, 
-    searchTerm,
-    favorites,
-    favoritesError,
-    weirdness }) => {
+
+class SelectGif extends React.Component {
 
     // Probably should split this into two actions...? One for actually 
     // adding a favorite and one for only updating the value of favoritesError.
-    const handleClickAddToFavorites = (giphyObject) => {
+    handleClickAddToFavorites = (giphyObject) => {
         
         // Check that no favorite yet exists for this searchTerm.
         // Filter for any favorites with the current searchTerm. If no
         // such favorites exist an empty array will be returned. 
-        const duplicateSearchTermFound = favorites.filter(fav => fav.forSearchTerm === this.state.searchTerm);
+        const duplicateSearchTermFound = this.props.favorites.filter(fav => fav.forSearchTerm === this.props.searchTerm);
 
         // Check that this specific GIF doesn't exist already in favorites. 
         // (Sometimes during testing, the giphy api returns the same gif even though the weirdness
@@ -32,14 +28,16 @@ const SelectGif = ({
         // So, this check just ensures that the GIF itself isn't duplicated in favorites.)
         // Returns an array with the duplicate object if found, otherwise returns
         // an empty array.
-        const duplicateGifFound = favorites.filter(fav => fav.id === giphyObject.id);
+        const duplicateGifFound = this.props.favorites.filter(fav => fav.id === this.props.giphyObject.id);
 
         // If a favorite for the current searchTerm exists or the current giphyObject 
         // already exists in favorites (i.e., either array will 
         // have a length > 0), set favortiesError to true, thus conditionally rendering
         // the error message. 
         if (duplicateSearchTermFound.length > 0 || duplicateGifFound.length > 0) {
-            this.props.dispatch(addToFavorites(searchTerm, newFavorite=null, favoritesError=true));
+            const newFavorite = null;
+            this.props.dispatch(addToFavorites(this.props.searchTerm, newFavorite, true));
+
         
         // If no favorite for this searchTerm or GIF exists, add this GIF as a new favorite.
         } else {
@@ -50,45 +48,51 @@ const SelectGif = ({
             
             // Add weirdness value and searchTerm from state to giphyObject.
             const newFavorite = {
-                ...giphyObject,
-                weirdness,
-                forSearchTerm: searchTerm
+                ...this.props.giphyObject,
+                weirdness: this.props.weirdness,
+                forSearchTerm: this.props.searchTerm
             };
 
             // Add this new favorite to the favorites list in state.
             // Reset searchTerm to empty string, so alert will display and focus 
             // will be passed to the search box in the SearchBox component.
-            this.props.dispatch(addToFavorites(searchTerm='', newFavorite, favoritesError=false));
+            this.props.dispatch(addToFavorites('', newFavorite, false));
+
         }
     }
 
-    return (
-        <section className="select-gif">
+    render() {
 
-            <Intro />
+        const { giphyObject, favoritesError } = this.props;
 
-            <SearchBox />
+        return (
+            <section className="select-gif">
 
-            <GiphyResult />
+                <Intro />
 
-            <Button 
-                buttonClassName="button fav-button"
-                buttonType="button"
-                buttonEvent={handleClickAddToFavorites}
-                buttonEventArg={giphyObject}
-                buttonContent={<FontAwesomeIcon className='fa-thumbs-up' icon={faThumbsUp} />}
-                buttonDisabled={false}
-            />
+                <SearchBox />
 
-            {favoritesError && 
-                <div className="error">
-                    Oops! You are only allowed to like one GIF per search term. Please enter a different search term.
-                </div>}
+                <GiphyResult />
 
-            <WeirdSlider />
+                <Button 
+                    buttonClassName="button fav-button"
+                    buttonType="button"
+                    buttonEvent={this.handleClickAddToFavorites}
+                    buttonEventArg={giphyObject}
+                    buttonContent={<FontAwesomeIcon className='fa-thumbs-up' icon={faThumbsUp} />}
+                    buttonDisabled={false}
+                />
 
-        </section>
-    )
+                {favoritesError && 
+                    <div className="error">
+                        Oops! You are only allowed to like one GIF per search term. Please enter a different search term.
+                    </div>}
+
+                <WeirdSlider />
+
+            </section>
+        )
+    }
 }
 
 const mapStateToProps = (state) => ({

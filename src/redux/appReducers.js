@@ -22,7 +22,7 @@ const appReducer = (state = initialState, action) => {
         case CHANGE_SEARCH_TERM: 
             return {
                 ...state,
-                searchTerm,
+                searchTerm: action.searchTerm,
                 // Set favoritesError to false when a new searchTerm has been entered.
                 favoritesError: false
             };
@@ -42,22 +42,22 @@ const appReducer = (state = initialState, action) => {
         case ADD_TO_FAVORITES:
             return {
                 ...state,
-                searchTerm,
+                searchTerm: action.searchTerm,
                 favorites: [
                     ...state.favorites,
-                    newFavorite,
+                    action.newFavorite
                 ],
-                favoritesError
+                favoritesError: action.favoritesError
             };
         case REMOVE_FROM_FAVORITES:
             return {
                 ...state,
-                favorites: revisedFavorites
+                favorites: action.revisedFavorites
             };
         case CHANGE_WEIRDNESS:
             return {
                 ...state,
-                weirdness
+                weirdness: action.weirdness
             };
         case START_OVER:
             return {

@@ -6,40 +6,46 @@ import { connect } from 'react-redux';
 import { startOver } from '../redux/actions';
 import '../css/Results.css';
 
-const Results = ({ favorites }) => {
+class Results extends React.Component {
     
-    // Calculate total weirdness score by finding average weirdness from 
-    // the weirdness value of each favorite.
-    const totalScore = Math.round(
-            favorites.reduce((total, currVal) => (total += currVal.weirdness), 0)
-        )/favorites.length;
-
-    const handleClickStartOver = () => {
-            this.props.dispatch(startOver());
+    handleClickStartOver = () => {
+        this.props.dispatch(startOver());
     }
+
+    render() {
     
-    return (
-        <section className="results">
+        const { favorites } = this.props;
+    
+        // Calculate total weirdness score by finding average weirdness from 
+        // the weirdness value of each favorite.
+        const totalScore = Math.round(
+                favorites.reduce((total, currVal) => (total += currVal.weirdness), 0)
+            )/favorites.length;
 
-            <h2 className="total-score">
-                You scored {totalScore} out of 10 on the weirdness scale!
-            </h2>
+    
+        return (
+            <section className="results">
 
-            <ResultsFavorites 
-                favorites={favorites}
-            />
+                <h2 className="total-score">
+                    You scored {totalScore} out of 10 on the weirdness scale!
+                </h2>
 
-            <Button
-                buttonClassName="button"
-                buttonType="button"
-                buttonEvent={handleClickStartOver}
-                buttonEventArg={null}
-                buttonContent={<Link to="/" className='start-over-button'>START OVER</Link>}
-                buttonDisabled={false}
-            />
- 
-        </section>
-    );
+                <ResultsFavorites 
+                    favorites={favorites}
+                />
+
+                <Button
+                    buttonClassName="button"
+                    buttonType="button"
+                    buttonEvent={this.handleClickStartOver}
+                    buttonEventArg={null}
+                    buttonContent={<Link to="/" className='start-over-button'>START OVER</Link>}
+                    buttonDisabled={false}
+                />
+    
+            </section>
+        );
+    }
 }
 
 const mapStateToProps = (state) => ({
