@@ -4,6 +4,14 @@ This project was created for the Politech code challenge.
 ## Weirdness Calculator
 Find and favorite weird gifs with this single page asynchronous web app. 
 
+### Notes on this code challenge submission
+- The master branch is a fully functional app using simple state. I am learning Redux for this challenge, so I thought it best to get the app working with simple state first.
+- The redux-version branch is a *basically* functional app using Redux state, but needs a lot of debugging. However, I think this is what I can reasonably finish to submit the challenge by the deadline.
+- My styles for the top border of the YOUR RESULTS section don't match the mock-up, and that's due to how I nested those components. 
+- I'm not sure how granular my commits should be. If you have rules/recommendations around appropriate commit milestones, I will follow them. 
+- I have one silly little smoke test written, but no other tests...so this was definitely not developed using test-driven-development.
+- Chrome has a lot of warnings about cookies from the Giphy API. From my research (granted it was not at all exhaustive), it seems like this is something that Giphy needs to change on their end.
+
 ### Technical notes
 - Frameworks and libraries:  React, React Router, Fontawesome
     - for redux-version branch: Redux, React-Redux, Redux-Thunk
@@ -29,4 +37,6 @@ script will find it for a production build as well.
     - $ npm test
 - Build for production
     - $ npm run build
+
+
 
