@@ -5,7 +5,7 @@ const Button = ({ buttonClassName, buttonType, buttonEvent, buttonEventArg, butt
 
     // If there is no event handler for this button, pass null to the onClick handler, so we
     // don't get an error. If there IS an event handler render it (along with its argument) 
-    // inside an fat arrow function. 
+    // inside a fat arrow function. 
     const onClickContent = !buttonEvent ? null : (event) => buttonEvent(buttonEventArg, ref);
 
     return (

@@ -2,15 +2,21 @@ import React from 'react';
 import Button from './Button';
 import ResultsFavorites from './ResultsFavorites';
 import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { startOver } from '../redux/actions';
 import '../css/Results.css';
 
-const Results = ({ favorites, handleClickStartOver }) => {
+const Results = ({ favorites }) => {
     
     // Calculate total weirdness score by finding average weirdness from 
     // the weirdness value of each favorite.
     const totalScore = Math.round(
             favorites.reduce((total, currVal) => (total += currVal.weirdness), 0)
         )/favorites.length;
+
+    const handleClickStartOver = () => {
+            this.props.dispatch(startOver());
+    }
     
     return (
         <section className="results">
@@ -36,4 +42,8 @@ const Results = ({ favorites, handleClickStartOver }) => {
     );
 }
 
-export default Results; 
+const mapStateToProps = (state) => ({
+    favorites: state.appReducers.favorites
+});
+
+export default connect(mapStateToProps)(Results); 

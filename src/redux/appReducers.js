@@ -6,17 +6,13 @@ import {
     CHANGE_WEIRDNESS,
     START_OVER
 } from './actions';
-import { placeholderGIF } from '../components/tempData';
 
 
 const initialState = {
     searchTerm: '',
     weirdness: 0,
-    giphyObject: placeholderGIF, // move to fetchReducer???
     favorites: [], 
     favoritesError: false,
-    isLoading: false, // move to fetchReducer???
-    error: null, // move to fetchReducer???
 };
 
 const appReducer = (state = initialState, action) => {

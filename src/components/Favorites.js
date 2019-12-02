@@ -4,9 +4,11 @@ import GifItem from './GifItem';
 import Button from './Button';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTimesCircle } from '@fortawesome/free-solid-svg-icons';
+import { connect } from 'react-redux';
+import { removeFromFavorites } from '../redux/actions';
 import '../css/Favorites.css';
 
-const Favorites = ({ favorites, handleRemoveFromFavorites }) => {
+const Favorites = ({ favorites }) => {
 
     // Determine current number of favorites and the number of favorites
     // needed before score can be calculated. 5 GIFs must be liked before score
@@ -24,19 +26,28 @@ const Favorites = ({ favorites, handleRemoveFromFavorites }) => {
     // Set a toggle for disabling the calculate score button based on the 
     // current number of favorites. If number of favorites is 5, then 
     // the button should not be disabled, hence disableButton = false.
-    //let disableButton = true;
     const disableButton = numberFavorites === 5 ? false : true;
+
+    const handleRemoveFromFavorites = (id) => {
+
+        // Filter for all favorites that do NOT have the id passed in. This effectively
+        // removes the favorite that DOES have the id passed in (i.e., the one the
+        // user wants to remove).
+        const revisedFavorites = favorites.filter(fav => fav.id !== id);
+    
+        // Update state with this new favorites array.
+        this.props.dispatch(removeFromFavorites(revisedFavorites));
+    }
 
     return (
         <section className="favorites">
             
             <h4>YOUR LIKED GIFS</h4>
 
-            {/* This list could be a separate component too...this seemed
-            a little easier to manage in terms of adjusting styles and class names... */}
+            {/* This list could be a separate component instead of just a list rendered... */}
             <div className="favorites-list">
 
-                {favorites.map((item, i) => (
+                {favorites.map((item) => (
                     <div className="favorite-item" key={`favorite-item-${item.id}`}>
                         
                         <FontAwesomeIcon 
@@ -82,4 +93,8 @@ const Favorites = ({ favorites, handleRemoveFromFavorites }) => {
     );
 }
 
-export default Favorites;
+const mapStateToProps = (state) => ({
+    favorites: state.appReducers.favorites
+});
+
+export default connect(mapStateToProps)(Favorites);

@@ -1,5 +1,6 @@
 import React from 'react';
 import GifItem from './GifItem';
+import { connect } from 'react-redux';
 import '../css/GiphyResult.css';
 
 const GiphyResult = ({ giphyObject, isLoading, error }) => {
@@ -27,4 +28,10 @@ const GiphyResult = ({ giphyObject, isLoading, error }) => {
     );
 }
 
-export default GiphyResult;
+const mapStateToProps = (state) => ({
+    giphyObject: state.fetchReducers.giphyObject,
+    isLoading: state.fetchReducers.isLoading,
+    error: state.fetchReducers.error
+});
+
+export default connect(mapStateToProps)(GiphyResult);
