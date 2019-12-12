@@ -5,8 +5,7 @@ This project was created for the Politech code challenge.
 Find and favorite weird gifs with this single page asynchronous web app. 
 
 ### Notes on this code challenge submission
-- The master branch is a fully functional app using simple state. I am learning Redux for this challenge, so I thought it best to get the app working with simple state first.
-- The redux-version branch is a *basically* functional app using Redux state, but needs a lot of debugging. However, I think this is what I can reasonably finish to submit the challenge by the deadline.
+- The master branch is now a fully functional app using Redux for state management. 
 - My styles for the top border of the YOUR RESULTS section don't match the mock-up, and that's due to how I nested those components. 
 - I'm not sure how granular my commits should be. If you have rules/recommendations around appropriate commit milestones, I will follow them. 
 - I have one silly little smoke test written, but no other tests...so this was definitely not developed using test-driven-development.
