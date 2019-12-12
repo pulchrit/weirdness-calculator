@@ -1,3 +1,9 @@
+.gif-item {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
 .gif-image {
     display: block;
     width: 100%;

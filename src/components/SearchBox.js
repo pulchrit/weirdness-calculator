@@ -1,15 +1,23 @@
 import React from 'react';
 import Button from './Button';
+import { connect } from 'react-redux';
+import { 
+    fetchGif,
+    changeSearchTerm,
+    clearSearchTerm
+ } from '../redux/actions';
+
 import '../css/SearchBox.css';
 
-export default class SearchBox extends React.Component {
+class SearchBox extends React.Component {
 
     // Adding a ref to the input element to pass focus to it after a user
     // likes a GIF. 
-    constructor(props) {
-        super(props)
+    //constructor(props) {
+    constructor() {
+        super()
         this.searchRef = React.createRef();
-    }
+    } 
 
     // This component will update when the searchTerm is changed to an empty string 
     // This happens in the handleClickAddToFavorites() method in App component; after 
@@ -25,13 +33,30 @@ export default class SearchBox extends React.Component {
         }
     }
 
+    handleSubmitSearch = (event, searchTerm, weirdness) => {
+        event.preventDefault();
+        // Dispatch action to get gif from Giphy API based on 
+        // searchTerm and weirdness from state.
+        this.props.dispatch(fetchGif(searchTerm, weirdness));
+    }
+
+    handleChangeSearchTerm = (searchTerm) => {
+        // Dispatch action to change searchTerm.
+        this.props.dispatch(changeSearchTerm(searchTerm));
+    }
+
+    handleClearSearchTerm = () => {
+        this.props.dispatch(clearSearchTerm());
+    }
+
+
     render() {
 
-       const { handleSubmitSearch, handleChangeSearchTerm, searchTerm, handleClearSearchTerm } = this.props;
-       
+       const { searchTerm, weirdness } = this.props;
+
         return (
 
-            <form className='search-form' onSubmit={handleSubmitSearch} >
+            <form className='search-form' onSubmit={(event) => this.handleSubmitSearch(event, searchTerm, weirdness)} >
 
                 {!searchTerm && <p className="enter-search-term">Please enter a search term below.</p>}
                 
@@ -49,8 +74,8 @@ export default class SearchBox extends React.Component {
                         placeholder="Hamburger"
                         ref={this.searchRef} 
                         value={searchTerm}
-                        onChange={(event) => handleChangeSearchTerm(event.target.value)}
-                        onClick={handleClearSearchTerm}
+                        onChange={(event) => this.handleChangeSearchTerm(event.target.value)}
+                        onClick={this.handleClearSearchTerm}
                     />
                     
                     <Button 
@@ -67,7 +92,12 @@ export default class SearchBox extends React.Component {
             </form>
         );  
     }
-
-
 }
+
+const mapStateToProps = (state) => ({
+    searchTerm: state.appReducers.searchTerm,
+    weirdness: state.appReducers.weirdness
+});
+
+export default connect(mapStateToProps)(SearchBox);
 

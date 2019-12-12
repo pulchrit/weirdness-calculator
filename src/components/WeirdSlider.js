@@ -1,25 +1,40 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import { changeWeirdness } from '../redux/actions';
 import '../css/WeirdSlider.css';
 
-const WeirdSlider = ({ weirdness, handleWeirdnessChange }) => {
+class WeirdSlider extends React.Component {
     
-    return (
-        <div className="weirdness-slider">
-            <input 
-                type="range" 
-                id="weirdness" 
-                className="slider" 
-                name="weirdness" 
-                min="0" 
-                max="10" 
-                value={weirdness}
-                onChange={(event) => handleWeirdnessChange(event.target.valueAsNumber)}
-            />
+    handleWeirdnessChange = (weirdness) => {
+        this.props.dispatch(changeWeirdness(weirdness));
+    }
+    
+    render() {
 
-            <label htmlFor="weirdness">Weirdness: {weirdness}</label>
-        </div>
+        const { weirdness } = this.props;
 
-    );
+        return (
+            <div className="weirdness-slider">
+                <input 
+                    type="range" 
+                    id="weirdness" 
+                    className="slider" 
+                    name="weirdness" 
+                    min="0" 
+                    max="10" 
+                    value={weirdness}
+                    onChange={(event) => this.handleWeirdnessChange(event.target.valueAsNumber)}
+                />
+
+                <label htmlFor="weirdness">Weirdness: {weirdness}</label>
+            </div>
+
+        );
+    }
 }
 
-export default WeirdSlider;
+const mapStateToProps = (state) => ({
+    weirdness: state.appReducers.weirdness,
+})
+
+export default connect(mapStateToProps)(WeirdSlider);
