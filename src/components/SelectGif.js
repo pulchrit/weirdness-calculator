@@ -7,7 +7,7 @@ import Button from './Button';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faThumbsUp } from '@fortawesome/free-solid-svg-icons';
 import { connect } from 'react-redux';
-import { addToFavorites } from '../redux/actions';
+import { addToFavorites, throwFavoritesError } from '../redux/actions';
 import '../css/SelectGif.css';
 
 
@@ -35,8 +35,11 @@ class SelectGif extends React.Component {
         // have a length > 0), set favortiesError to true, thus conditionally rendering
         // the error message. 
         if (duplicateSearchTermFound.length > 0 || duplicateGifFound.length > 0) {
-            const newFavorite = null;
-            this.props.dispatch(addToFavorites(this.props.searchTerm, newFavorite, true));
+            this.props.dispatch(throwFavoritesError(this.props.searchTerm, true));
+            // const newFavorite = null;
+            // const newFavorite = {};
+            // this.props.dispatch(addToFavorites(this.props.searchTerm, newFavorite, true));
+            // this.props.dispatch(addToFavorites(this.props.searchTerm, true));
 
         
         // If no favorite for this searchTerm or GIF exists, add this GIF as a new favorite.

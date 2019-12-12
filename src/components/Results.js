@@ -3,13 +3,14 @@ import Button from './Button';
 import ResultsFavorites from './ResultsFavorites';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { startOver } from '../redux/actions';
+import { startOver, resetGif } from '../redux/actions';
 import '../css/Results.css';
 
 class Results extends React.Component {
     
     handleClickStartOver = () => {
         this.props.dispatch(startOver());
+        this.props.dispatch(resetGif());
     }
 
     render() {

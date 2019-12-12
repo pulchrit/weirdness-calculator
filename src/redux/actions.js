@@ -9,9 +9,11 @@ import {
 export const CHANGE_SEARCH_TERM = 'CHANGE_SEARCH_TERM';
 export const CLEAR_SEARCH_TERM = 'CLEAR_SEARCH_TERM';
 export const ADD_TO_FAVORITES = 'ADD_TO_FAVORITES';
+export const THROW_FAVORITES_ERROR = 'THROW_FAVORITES_ERROR';
 export const REMOVE_FROM_FAVORITES = 'REMOVE_FROM_FAVORITES';
 export const CHANGE_WEIRDNESS = 'CHANGE_WEIRDNESS';
 export const START_OVER = 'START_OVER';
+export const RESET_GIF = 'RESET_GIF';
 export const FETCH_GIF_BEGIN = 'FETCH_GIF_BEGIN';
 export const FETCH_GIF_SUCCESS = 'FETCH_GIF_SUCCESS';
 export const FETCH_GIF_FAILURE = 'FETCH_GIF_FAILURE';
@@ -33,6 +35,12 @@ export const addToFavorites = (searchTerm, newFavorite, favoritesError) => ({
     favoritesError  
 });
 
+export const throwFavoritesError = (searchTerm, favoritesError) => ({
+    type: THROW_FAVORITES_ERROR,
+    searchTerm,
+    favoritesError
+});
+
 export const removeFromFavorites = (revisedFavorites) => ({
     type: REMOVE_FROM_FAVORITES,
     revisedFavorites 
@@ -46,6 +54,10 @@ export const changeWeirdness = (weirdness) => ({
 export const startOver = () => ({
     type: START_OVER,  
 });
+
+export const resetGif = () => ({
+    type: RESET_GIF,
+})
 
 export const fetchGifBegin = (searchTerm, weirdness) => ({
     type: FETCH_GIF_BEGIN,

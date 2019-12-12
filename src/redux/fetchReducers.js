@@ -6,7 +6,8 @@ import { placeholderGIF } from '../components/tempData';
 import {
     FETCH_GIF_BEGIN,
     FETCH_GIF_SUCCESS,
-    FETCH_GIF_FAILURE
+    FETCH_GIF_FAILURE,
+    RESET_GIF
 } from './actions';
 
 const initialState = {
@@ -26,7 +27,7 @@ const fetchReducer = (state = initialState, action) => {
                 // set giphyObject to empty object here so that loading message will appear?
             };
         case FETCH_GIF_SUCCESS:
-            // API should be complete; set isLoading to false,
+            // API call should be complete; set isLoading to false,
             // replace giphyObject with new one from the Giphy API.
             // error was reset above in BEGIN action.
             return {
@@ -41,11 +42,21 @@ const fetchReducer = (state = initialState, action) => {
             // that the error message will appear. 
             return {
                 ...state,
+                isLoading: false,
                 giphyObject: {},
                 error: action.payload.error
             };
+        case RESET_GIF: 
+            return {
+                ...state,
+                giphyObject: placeholderGIF,
+            };
         default: 
-            return state;
+            return {
+                ...state, 
+                isLoading: false, 
+                error: null,
+            };
     }
 }
 

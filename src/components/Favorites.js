@@ -42,7 +42,7 @@ class Favorites extends React.Component {
         // the button should not be disabled, hence disableButton = false.
         const disableButton = numberFavorites === 5 ? false : true;
 
-
+        console.log('favorites:', favorites);
         return (
 
             <section className="favorites">

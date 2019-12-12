@@ -4,6 +4,8 @@ import '../css/GifItem.css';
 
 const GifItem = ({ giphyObject, gifSize }) => {
 
+    console.log('giphyobject from gifItem:', giphyObject);
+
     // Get title. Initialize url.
     const {title} = giphyObject;
     let url;

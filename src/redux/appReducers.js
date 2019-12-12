@@ -2,6 +2,7 @@ import {
     CHANGE_SEARCH_TERM, 
     CLEAR_SEARCH_TERM,
     ADD_TO_FAVORITES,
+    THROW_FAVORITES_ERROR,
     REMOVE_FROM_FAVORITES,
     CHANGE_WEIRDNESS,
     START_OVER
@@ -49,6 +50,12 @@ const appReducer = (state = initialState, action) => {
                 ],
                 favoritesError: action.favoritesError
             };
+        case THROW_FAVORITES_ERROR:
+            return {
+                ...state,
+                searchTerm: action.searchTerm,
+                favoritesError: action.favoritesError
+            };
         case REMOVE_FROM_FAVORITES:
             return {
                 ...state,
@@ -61,7 +68,10 @@ const appReducer = (state = initialState, action) => {
             };
         case START_OVER:
             return {
-                state: initialState
+                searchTerm: '',
+                weirdness: 0,
+                favorites: [], 
+                favoritesError: false,
             };
         default:
             return state;        
