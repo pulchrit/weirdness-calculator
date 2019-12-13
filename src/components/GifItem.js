@@ -4,8 +4,12 @@ import '../css/GifItem.css';
 
 const GifItem = ({ giphyObject, gifSize }) => {
 
-    // Get title. Initialize url.
-    const {title} = giphyObject;
+    // Get title. If this gif has not title, then give it
+    // a title of "Untitled".
+    let {title} = giphyObject;
+    if (!title) {title = "Untitled"}; 
+
+    //Initialize url to assign it later based on size of gif needed.
     let url;
 
     // Get url based on gif size needed for this view.

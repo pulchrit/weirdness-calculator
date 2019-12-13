@@ -33,13 +33,10 @@ class SelectGif extends React.Component {
         // If a favorite for the current searchTerm exists or the current giphyObject 
         // already exists in favorites (i.e., either array will 
         // have a length > 0), set favortiesError to true, thus conditionally rendering
-        // the error message. 
+        // the error message. Also, set the searchTerm to empty string, so that focus will 
+        // be passed to the search box and prompt the user to enter a new searchTerm.
         if (duplicateSearchTermFound.length > 0 || duplicateGifFound.length > 0) {
-            this.props.dispatch(throwFavoritesError(this.props.searchTerm, true));
-            // const newFavorite = null;
-            // const newFavorite = {};
-            // this.props.dispatch(addToFavorites(this.props.searchTerm, newFavorite, true));
-            // this.props.dispatch(addToFavorites(this.props.searchTerm, true));
+            this.props.dispatch(throwFavoritesError('', true));
 
         
         // If no favorite for this searchTerm or GIF exists, add this GIF as a new favorite.
@@ -75,6 +72,11 @@ class SelectGif extends React.Component {
 
                 <SearchBox />
 
+                {favoritesError && 
+                    <div className="error">
+                        Oops! You are only allowed to like one GIF per search term. Please enter a different search term.
+                    </div>}
+
                 <GiphyResult />
 
                 <Button 
@@ -85,11 +87,6 @@ class SelectGif extends React.Component {
                     buttonContent={<FontAwesomeIcon className='fa-thumbs-up' icon={faThumbsUp} />}
                     buttonDisabled={false}
                 />
-
-                {favoritesError && 
-                    <div className="error">
-                        Oops! You are only allowed to like one GIF per search term. Please enter a different search term.
-                    </div>}
 
                 <WeirdSlider />
 
