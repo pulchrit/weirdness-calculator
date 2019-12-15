@@ -23,7 +23,7 @@ const store = createStore(
 
 ReactDOM.render(
     <Provider store={store}>
-        <BrowserRouter>
+        <BrowserRouter basename="/weirdness">
             <ScrollToTop>
                 <App />
             </ScrollToTop>

@@ -1,5 +1,6 @@
 {
   "name": "weirdness-calculator",
+  "homepage": "https://melissalafranchise.com/weirdness/",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
